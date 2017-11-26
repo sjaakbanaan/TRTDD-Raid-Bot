@@ -1,0 +1,17 @@
+{
+    "name": "trtdd-raid-bot",
+    "version": "1.0.0",
+    "description": "TRTDD raid bot (testing)",
+    "files": {
+        "vars.js",
+        "mons.js",
+        "gyms.js",
+    },
+    "main": "bot.js",
+    "author": "sjaakbanaan",
+    "dependencies": {
+        "discord.io": "^2.5.3",
+        "embed-creator": "^1.1.4",
+        "winston": "^2.4.0"
+    }
+}
