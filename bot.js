@@ -56,7 +56,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         
         bot.sendMessage({
             to: channelID,
-            message: 'Poll: werkt niet meer  <@'+userID+'>. Gebruik voortaan `!raid`. Lees snel de instructies bovenaan het kanaal.'
+            message: 'Poll: werkt niet meer <@'+userID+'>. Gebruik voortaan `!raid`. Lees snel de instructies bovenaan het kanaal.'
         }, function(err, res) {
             if (!err) {
 
@@ -97,10 +97,15 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         // start time (maybe..)
         var starttime = args[2]; // case: start
         if (starttime == null) starttime = ''; // case: start
-
         
         // gym name
         var gymname = locationName(message); // case // raid
+        
+        var invalidchar = false;
+        if (message.indexOf('<') > -1 || message.indexOf('>') > -1) {
+            invalidchar = true;
+            logger.info(getLogTime()+': ongeldige char?: '+invalidchar);
+        }
         
         // everything after the gym name
         var msgslit = message.split('%');
@@ -137,7 +142,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     embedurl = 'https://outgress.com/portals/';
                     urltitle = 'Gymlocatie onbekend, zoek op outgress.com';
                 }
-                if (gymname) {
+                if (gymname && !invalidchar) {
                     
                     gymname = toTitleCase(gymname);
                     bot.sendMessage({
@@ -209,7 +214,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     
                     bot.sendMessage({
                         to: channelID,
-                        message: 'Geen geldige gymnaam opgegeven <@'+userID+'>. Vergeet niet om % voor en na de gymnaam te plaatsen. (bv. %De Denker%)'
+                        message: 'Er ging iets mis bij het invoeren <@'+userID+'>. Vergeet niet om % voor en na de gymnaam te plaatsen. (bv. %De Denker%). En de tekens \'>\' en \'<\' zijn niet toegestaan.'
                     }, function(err, res) {
                         if (!err) {
 
@@ -218,7 +223,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                     channelID: channelID,
                                     messageID: res.id,
                                 });
-                                logger.info(getLogTime()+': invalid location warning auto deleted');
+                                logger.info(getLogTime()+': invalid location or character warning auto deleted');
                             }, 60000); // delete after 1 min
 
                         } else {
