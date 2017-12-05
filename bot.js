@@ -1,7 +1,8 @@
 /* 
-        v3.2
-        NICE TO HAVE : Poll: -> lowercase
-        NICE TO HAVE : help !help
+        v3.3 - to do:
+        - Poll: -> lowercase
+        - help en !help
+        - spaties direct na beide % verwijderen        
 */
 
 var Discord = require('discord.io');
@@ -66,7 +67,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         messageID: res.id,
                     });
                     logger.info(getLogTime()+': poll warning auto deleted');
-                }, 60000); // delete after 1 min
+                }, 30000); // delete after 1 min
                 
             } else {
                 logger.info(err);
@@ -111,6 +112,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var msgslit = message.split('%');
         var otherinfo = msgslit.pop();
         
+        var totalparticipants = countParticipants(user, otherinfo);
+        
         // get new info after edit code
         var a = message.split(' ');        
         var newinfo = a.slice(2).join(' '); // case: edit
@@ -132,7 +135,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 // check if the gym name is correct
                 var embedmap = '';
                 var embedurl = '';
-                var urltitle = '';
+                var urltitle = '';                
                 
                 if (longlat) {
                     embedmap = 'https://maps.googleapis.com/maps/api/staticmap?center='+longlat+'&zoom=15&size=250x125&markers=&markers=icon:'+iconpath+'%7Clabel:P%7C'+longlat+'&key='+mapsapikey;
@@ -177,10 +180,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                     value: '`'+user+'`'
                                 },
                                 {
-                                    name: 'Deelnemers',
+                                    name: 'Deelnemers ('+totalparticipants+')',
                                     value: '`'+user+'`'
                                 }
-                            ]
+                            ]                
+                    
                         }
                     }, function(err, res) {
                         if (!err) {
@@ -224,7 +228,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                     messageID: res.id,
                                 });
                                 logger.info(getLogTime()+': invalid location or character warning auto deleted');
-                            }, 60000); // delete after 1 min
+                            }, 30000); // delete after 1 min
 
                         } else {
                             logger.info(err);
@@ -301,7 +305,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 											messageID: res.id,
 										});
 										logger.info(getLogTime()+': invalid user action warning auto deleted');
-									}, 60000); // delete after 1 min
+									}, 30000); // delete after 1 min
 
 								} else {
 									logger.info(err);
@@ -321,7 +325,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                             logger.info(getLogTime()+': start time added msg auto deleted');
                         }
                     });
-                }, 60000); // delete after 1 min     
+                }, 30000); // delete after 1 min     
                
             break;
                 
@@ -381,7 +385,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 											messageID: res.id,
 										});
 										logger.info(getLogTime()+': invalid user action warning auto deleted');
-									}, 60000); // delete after 1 min
+									}, 30000); // delete after 1 min
 
 								} else {
 									logger.info(err);
@@ -401,7 +405,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                             logger.info(getLogTime()+': info changed msg auto deleted');
                         }
                     });
-                }, 60000); // delete after 1 min     
+                }, 30000); // delete after 1 min     
                
             break;
                 
@@ -476,7 +480,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                                 messageID: res.id,
                                             });
                                             logger.info(getLogTime()+': invalid user action warning auto deleted');
-                                        }, 60000); // delete after 1 min
+                                        }, 30000); // delete after 1 min
 
                                     } else {
                                         logger.info(err);
@@ -496,7 +500,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                 logger.info(getLogTime()+': location changed msg auto deleted');
                             }
                         });
-                    }, 60000); // delete after 1 min   
+                    }, 30000); // delete after 1 min   
                 } else {
                     
                     bot.sendMessage({
@@ -511,7 +515,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                     messageID: res.id,
                                 });
                                 logger.info(getLogTime()+': invalid location warning auto deleted');
-                            }, 60000); // delete after 1 min
+                            }, 30000); // delete after 1 min
 
                         } else {
                             logger.info(err);
@@ -559,7 +563,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 											messageID: res.id,
 										});
 										logger.info(getLogTime()+': invalid user action warning auto deleted');
-									}, 60000); // delete after 1 min
+									}, 30000); // delete after 1 min
 
 								} else {
 									logger.info(err);
@@ -578,7 +582,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                             logger.info(getLogTime()+': delete raid msg auto deleted');
                         }
                     });
-                }, 60000); // delete after 1 min 
+                }, 30000); // delete after 1 min 
                
             break;
         
@@ -595,7 +599,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                 messageID: res.id,
                             });
                             logger.info(getLogTime()+': help explanation auto deleted');
-                        }, 60000); // delete after 1 min
+                        }, 30000); // delete after 1 min
 
                     } else {
                         logger.info(err);
@@ -728,6 +732,15 @@ bot.on('messageReactionRemove', function(reaction) {
 
 function editMsg(channelid, msgid, orginfo, orgraidtitle, orgurl, orgthumb, starttime, 
                   orgstarter, orgparticipants, orgmap, orgthumb, orgeditcode, orgtitle) {
+    
+    var lines = orgparticipants.split(/\r|\r\n|\n/);
+    var countlines = lines.length;
+    
+    var participantsininfo = orginfo.charAt((orginfo.indexOf('+')+1));
+    countlines = Number(countlines) + Number(participantsininfo);
+    
+    var totalparticipants = countParticipants(orgparticipants, orginfo);
+    
     bot.editMessage({
         channelID: channelid,
         messageID: msgid,
@@ -749,8 +762,8 @@ function editMsg(channelid, msgid, orginfo, orgraidtitle, orgurl, orgthumb, star
                     value: orgstarter
                 },
                 {
-                    name: 'Deelnemers',
-                    value: orgparticipants
+                    name: 'Deelnemers ('+totalparticipants+')',
+                    value: orgparticipants.trim()
                 }
             ],
             image: {
@@ -770,6 +783,15 @@ function editMsg(channelid, msgid, orginfo, orgraidtitle, orgurl, orgthumb, star
             logger.info(err);
         }
     });
+}
+
+function countParticipants(orgparticipants, orginfo) {
+    var lines = orgparticipants.split(/\r|\r\n|\n/);
+    var countlines = lines.length;
+    
+    var participantsininfo = orginfo.charAt((orginfo.indexOf('+')+1));
+    countlines = Number(countlines) + Number(participantsininfo);
+    return countlines;
 }
 
 function capitalizeFirstLetter(string) {
@@ -817,7 +839,7 @@ function locationName(msg) {
     var start_pos = msg.indexOf('%') + 1;
     var end_pos = msg.indexOf('%',start_pos);
     var text_to_get = msg.substring(start_pos,end_pos)
-    return text_to_get;
+    return text_to_get.trim();
 }
 
 function isEmpty(obj) {
