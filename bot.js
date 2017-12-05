@@ -789,9 +789,17 @@ function countParticipants(orgparticipants, orginfo) {
     var lines = orgparticipants.split(/\r|\r\n|\n/);
     var countlines = lines.length;
     
-    var participantsininfo = orginfo.charAt((orginfo.indexOf('+')+1));
-    countlines = Number(countlines) + Number(participantsininfo);
+    var infocount = '0';
+    if (isNumeric(orginfo.charAt((orginfo.indexOf('+')+1)))) {
+        infocount = orginfo.charAt((orginfo.indexOf('+')+1));
+    }
+
+    countlines = Number(countlines) + Number(infocount);
     return countlines;
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 function capitalizeFirstLetter(string) {
