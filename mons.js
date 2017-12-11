@@ -51,7 +51,9 @@ var pokelist = [
     ['Celebi', '251', '1766'],
     ['Mew', '151', '1766'],
     ['Mewtwo', '150', '2275'],
-    ['Mewto', '150', '2275']
+    ['Mewto', '150', '2275'],    
+    ['Absol', '359', '1303'],
+    ['Mawile', '303', '848']
 ];
 
 exports.pokelist = pokelist;

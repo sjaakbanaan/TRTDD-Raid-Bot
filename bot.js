@@ -166,7 +166,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                               url: 'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/'+searchList(pokelist, pokemon, 1)+'.png'
                             },
                             footer: {
-                                text: searchList(pokelist, pokemon, 2)+' CP = 100% | wijzigcode: '+genEditCode()
+                                text: searchList(pokelist, pokemon, 2)+' CP = 100% IV (L20) | wijzigcode: '+genEditCode()
                             },
                             title: urltitle,
                             url: embedurl,                            
