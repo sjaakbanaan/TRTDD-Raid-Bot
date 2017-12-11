@@ -53,7 +53,8 @@ var pokelist = [
     ['Mewtwo', '150', '2275'],
     ['Mewto', '150', '2275'],    
     ['Absol', '359', '1303'],
-    ['Mawile', '303', '848']
+    ['Mawile', '303', '848'],
+    ['Groudon', '383', '2776'],
 ];
 
 exports.pokelist = pokelist;
