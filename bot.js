@@ -1,8 +1,7 @@
 /* 
-        v3.3 - to do:
+        v3.4 - to do:
         - Poll: -> lowercase
-        - help en !help
-        - spaties direct na beide % verwijderen        
+        - help en !help      
 */
 
 var Discord = require('discord.io');
@@ -148,6 +147,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 if (gymname && !invalidchar) {
                     
                     gymname = toTitleCase(gymname);
+                    var shinypossible = '';
+                    if (searchList(pokelist, pokemon, 6)=='yes') {
+                        shinypossible = ' | shiny possible!';
+                    }
+                    
                     bot.sendMessage({
                         to: channelID,
                         message: '`'+capitalizeFirstLetter(pokemon)+' bij '+gymname+otherinfo+'`',
@@ -166,7 +170,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                               url: 'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/'+searchList(pokelist, pokemon, 1)+'.png'
                             },
                             footer: {
-                                text: searchList(pokelist, pokemon, 2)+' CP = 100% IV (L20) | wijzigcode: '+genEditCode()
+                                text: 'wijzigcode: '+genEditCode()+' | 100% IV: '+searchList(pokelist, pokemon, 2)+' CP | '+searchList(pokelist, pokemon, 3)+'? 100% IV: '+searchList(pokelist, pokemon, 4)+' CP | tier '+searchList(pokelist, pokemon, 5)+shinypossible
                             },
                             title: urltitle,
                             url: embedurl,                            

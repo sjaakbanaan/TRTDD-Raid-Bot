@@ -157,7 +157,7 @@ var gymlist = [
     ['Binnenzijde Van De Maliepoort En Het Huis Lepelenburg' ,'52.0889410000', '5.1271630000'], 
     ['Historie Park Lepelenburg' ,'52.0899630000', '5.1277800000'], 
     ['Runestone' ,'52.0905000000', '5.1222730000'], 
-    ['Domtoren' ,'52.0906760000', '5.1213190000'], 
+    ['Domtoren' ,'52.0906760000', '5.1213190000'],    
     ['The Utrecht Longboat' ,'52.1093860000', '5.0958250000'], 
     ['Vrijheidsboom Mei 1945' ,'52.1067200000', '5.0927550000'], 
     ['Vrouwen Beeld Plantsoen' ,'52.0895180000', '5.1380930000'], 
@@ -402,6 +402,7 @@ var gymlist = [
     ['Dorpskerk Bunnik' ,'52.0684410000', '5.2024960000'], 
     ['Tower Bridge Indundatiekanaal' ,'52.0631060000', '5.1299740000'], 
     ['Playing In The Betuwe' ,'52.0631840000', '5.1376740000'], 
+    ['De Dom' ,'52.0906760000', '5.1213190000'], // alias
     ['Immanuelkerk' ,'52.0646650000', '5.1251820000'], // alias
     ['Rokade' ,'52.1136940000', '5.0888250000'], // alias
     ['playing in de betuwe', '52.063184', '5.137674'], // alias
