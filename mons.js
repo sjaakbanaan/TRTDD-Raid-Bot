@@ -4,6 +4,7 @@ var pokelist = [
     ['Wartortle', '008', '756', 'rainy', '945', '1', 'no'],
     ['Metapod', '011', '239', 'rainy', '299', '1', 'no'],
     ['Magicarp', '129', '125', 'rainy', '157', '1', 'yes'],    
+    ['Wailmer', '320', '945', 'rainy', '1017', '1', 'no'],
     ['Cloyster', '091', '1414', 'rainy + Snow', '1767', '2', 'no'],
     ['Magneton', '082', '1278', 'rainy + Snow', '1598', '2', 'no'],
     ['Marowak', '105', '966', 'sunny', '1208', '2', 'no'],
@@ -54,9 +55,13 @@ var pokelist = [
     ['Hooh', '250', '2222', 'sunny + windy', '2778', '5', 'no'],
     ['Oh-oh', '250', '2222', 'sunny + windy', '2778', '5', 'no'],
     ['Mew', '151', '1766', 'windy', '2207', '5', 'no'],
-    ['Celebi', '251', '1766', 'sunny + windy', '2207', '5', 'no'],
+    ['Celebi', '251', '1766', 'sunny + windy', '2207', '5', 'no'],    
     ['Groudon', '383', '2328', 'sunny', '2910', '5', 'no'],
-    ['Groundon', '383', '2328', 'sunny', '2910', '5', 'no']
+    ['Groundon', '383', '2328', 'sunny', '2910', '5', 'no'],    
+    ['Kyogre', '383', '2796', 'rainy', '2910', '5', 'no'],
+    ['Kyoger', '383', '2796', 'rainy', '2910', '5', 'no'],
+    ['Rayquaza', '384', '2494', 'windy', '2604', '5', 'no'],
+    ['Raykuaza', '384', '2494', 'windy', '2604', '5', 'no'],
 ];
  
 exports.pokelist = pokelist;

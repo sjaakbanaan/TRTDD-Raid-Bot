@@ -1,5 +1,5 @@
 /* 
-        v3.4 - to do:
+        v3.5 - to do:
         - Poll: -> lowercase
         - help en !help      
 */
@@ -50,7 +50,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     var roles       = server.roles;
     var member      = server.members[userID];
     
-    var hasAdmin    = member.roles.some(roleID => roles[roleID].GENERAL_ADMINISTRATOR);
+    if (member) { // or else it will break when webhooks are caled (no member role)
+        var hasAdmin    = member.roles.some(roleID => roles[roleID].GENERAL_ADMINISTRATOR);
+    }
     
     if (message.substring(0, 5) == 'poll:') {
         
@@ -170,7 +172,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                               url: 'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/'+searchList(pokelist, pokemon, 1)+'.png'
                             },
                             footer: {
-                                text: 'wijzigcode: '+genEditCode()+' | 100% IV: '+searchList(pokelist, pokemon, 2)+' CP | '+searchList(pokelist, pokemon, 3)+'? 100% IV: '+searchList(pokelist, pokemon, 4)+' CP | tier '+searchList(pokelist, pokemon, 5)+shinypossible
+                                text: 'wijzigcode: '+genEditCode()+' | 100% IV: '+searchList(pokelist, pokemon, 2)+' CP | '+searchList(pokelist, pokemon, 3)+'? 100% IV: '+searchList(pokelist, pokemon, 4)+' CP'
                             },
                             title: urltitle,
                             url: embedurl,                            

@@ -429,7 +429,11 @@ var gymlist = [
     ['park Vechtoever','52.122455','5.072926'], // alias
     ['paviljoen aan de Nedereindse Plas','52.037194','5.058936'], // alias
     ['shield','52.065042','5.08373'], // alias
-    ['t Raafje','52.068885','5.118721'] // alias
+    ['t Raafje','52.068885','5.118721'], // alias
+    ['Gaybrapad' ,'52.0932080000', '5.1149580000'], // alias
+    ['Vrijheidsboom' ,'52.1067200000', '5.0927550000'], // alias
+    ['Zittend figuur' ,'52.0897590000', '5.1309300000'], // alias
+    ['Staand Meisje' ,'52.0917740000', '5.1339800000'], // alias
 ];
 
 exports.gymlist = gymlist;
