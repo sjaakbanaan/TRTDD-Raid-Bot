@@ -4,22 +4,22 @@ var pokelist = [
     ['Wartortle', '008', '756', 'rainy', '945', '1', 'no'],
     ['Metapod', '011', '239', 'rainy', '299', '1', 'no'],
     ['Magicarp', '129', '125', 'rainy', '157', '1', 'yes'],    
-    ['Wailmer', '320', '945', 'rainy', '1017', '1', 'no'],
+    ['Wailmer', '320', '945', 'rainy', '1017', '1', 'no'],  ///////////////  TIER 2
     ['Cloyster', '091', '1414', 'rainy + Snow', '1767', '2', 'no'],
     ['Magneton', '082', '1278', 'rainy + Snow', '1598', '2', 'no'],
     ['Marowak', '105', '966', 'sunny', '1208', '2', 'no'],
     ['Mawile', '303', '848', 'Snow + cloudy', '1060', '2', 'yes'],
     ['Sableye', '302', '745', 'fog', '932', '2', 'no'],
     ['Sandslash', '028', '1330', 'sunny', '1663', '2', 'no'],
-    ['Tentacruel', '073', '1356', 'rainy + cloudy', '1695', '2', 'no'],    
+    ['Tentacruel', '073', '1356', 'rainy + cloudy', '1695', '2', 'no'],  ///////////////  TIER 3  
     ['Alakazam', '065', '1649', 'windy', '2062', '3', 'no'],
     ['Gengar', '094', '1496', 'fog + cloudy', '1870', '3', 'no'],
     ['Machamp', '068', '1650', 'cloudy', '2063', '3', 'no'],
     ['Ninetales', '038', '1233', 'sunny/clear', '1541', '3', 'no'],
     ['Omastar', '139', '1534', 'rainy + partly cloudy', '1918', '3', 'no'],
     ['Porygon', '137', '895', 'partly cloudy', '1120', '3', 'no'],
-    ['Scyther', '123', '1408', 'rainy + windy', '1760', '3', 'no'],    
-    ['Absol', '359', '1303', 'fog', '1629', '4', 'yes'],
+    ['Scyther', '123', '1408', 'rainy + windy', '1760', '3', 'no'], ///////////////  TIER 4
+    ['Absol', '359', '1303', 'fog', '1629', '4', 'yes'], 
     ['Golem', '076', '1666', 'sunny + Partly cloudy', '2083', '4', 'no'],
     ['Lapras', '131', '1487', 'rainy', '1859', '4', 'no'],
     ['Lappie', '131', '1487', 'rainy', '1859', '4', 'no'],
@@ -34,7 +34,7 @@ var pokelist = [
     ['Snorro', '143', '1917', 'partly cloudy', '2396', '4', 'no'],
     ['Tyranitar', '248', '2097', 'partly cloudy + fog', '2621', '4', 'no'],
     ['Tyra', '248', '2097', 'partly cloudy + fog', '2621', '4', 'no'],
-    ['Victrebell', '071', '1296', 'sunny', '1620', '4', 'no'],
+    ['Victrebell', '071', '1296', 'sunny', '1620', '4', 'no'],  ///////////////  TIER 5   
     ['Articuno', '144', '1676', 'snow + windy', '2095', '5', 'no'],
     ['Lugia', '249', '2056', 'windy', '2570', '5', 'no'],
     ['Moltres', '146', '1870', 'sunny + windy', '2337', '5', 'no'],
@@ -58,10 +58,11 @@ var pokelist = [
     ['Celebi', '251', '1766', 'sunny + windy', '2207', '5', 'no'],    
     ['Groudon', '383', '2328', 'sunny', '2910', '5', 'no'],
     ['Groundon', '383', '2328', 'sunny', '2910', '5', 'no'],    
-    ['Kyogre', '382', '2796', 'rainy', '2910', '5', 'no'],
-    ['Kyoger', '382', '2796', 'rainy', '2910', '5', 'no'],
-    ['Rayquaza', '384', '2494', 'windy', '2604', '5', 'no'],
-    ['Raykuaza', '384', '2494', 'windy', '2604', '5', 'no'],
+    ['Kyogre', '382', '2328', 'rainy', '2910', '5', 'no'],
+    ['Kyoger', '382', '2328', 'rainy', '2910', '5', 'no'],
+    ['Rayquaza', '384', '2083', 'windy', '2604', '5', 'no'],
+    ['Raykuaza', '384', '2083', 'windy', '2604', '5', 'no'],
+    ['Raykaza', '384', '2083', 'windy', '2604', '5', 'no'],
 ];
  
 exports.pokelist = pokelist;
