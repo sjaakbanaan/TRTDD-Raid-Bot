@@ -147,10 +147,10 @@ var gymlist = [
     ['Werkspoorbrug' ,'52.1096170000', '5.0786560000'], 
     ['Old Green-Blue Bridge' ,'52.1065060000', '5.0781190000'], 
     ['Geometric Shapes' ,'52.0981760000', '5.1209420000'], 
-    ['Mosque in the Mist ' ,'52.1081830000', '5.0857240000'], 
+    ['Mosque in the Mist ' ,'52.1081830000', '5.0857240000'],
     ['Le Giraffe' ,'52.0908920000', '5.1206430000'], 
     ['Muurschildering Vlampijpateliers' ,'52.1064950000', '5.0823970000'], 
-    ['Fontein bij Stadsschouwburg' ,'52.0931160000', '5.1264690000'], 
+    ['Fontein bij Stadsschouwburg' ,'52.0931160000', '5.1264690000'],
     ['Guitar Lady' ,'52.0930120000', '5.1248170000'], 
     ['Keep Pumping' ,'52.0912830000', '5.1248100000'], 
     ['Nijntje doet Kiekeboe' ,'52.0903070000', '5.1255840000'], 
@@ -392,16 +392,18 @@ var gymlist = [
     ['Jan The Man' ,'52.1198520000', '5.0672750000'], 
     ['Glass Design \' Waterlelie\'' ,'52.1201060000', '5.0735880000'], 
     ['Kat Sculpturen' ,'52.1208190000', '5.0714220000'], 
-    ['Poort naar de Parel van Zuilen' ,'52.1185920000', '5.0777380000'], 
+    ['Poort naar de Parel van Zuilen' ,'52.1185920000', '5.0777380000'],
     ['Bielzen' ,'52.0638320000', '5.2014570000'], 
     ['Greek with a Flute' ,'52.1144610000', '5.0773830000'], 
     ['Jagerspaal en -pad Vechtdijk' ,'52.1194200000', '5.0794330000'], 
     ['De Gaarde' ,'52.0670490000', '5.1977390000'], 
     ['Hockeyclub Kromme Rijn' ,'52.0685630000', '5.2074940000'], 
     ['Bal van Bunnik' ,'52.0671830000', '5.2004190000'], 
-    ['Dorpskerk Bunnik' ,'52.0684410000', '5.2024960000'], 
-    ['Tower Bridge Indundatiekanaal' ,'52.0631060000', '5.1299740000'], 
+    ['Dorpskerk Bunnik' ,'52.0684410000', '5.2024960000'],
+    ['Tower Bridge Indundatiekanaal' ,'52.0631060000', '5.1299740000'],
     ['Playing In The Betuwe' ,'52.0631840000', '5.1376740000'], 
+    ['Heilige Drie Eenheid' ,'52.090664', '5.1157760'],
+	['Vaaltbrug','52.09768400','5.12439800'],
     ['De Dom' ,'52.0906760000', '5.1213190000'], // alias
     ['Immanuelkerk' ,'52.0646650000', '5.1251820000'], // alias
     ['Rokade' ,'52.1136940000', '5.0888250000'], // alias
@@ -434,6 +436,13 @@ var gymlist = [
     ['Vrijheidsboom' ,'52.1067200000', '5.0927550000'], // alias
     ['Zittend figuur' ,'52.0897590000', '5.1309300000'], // alias
     ['Staand Meisje' ,'52.0917740000', '5.1339800000'], // alias
+    ['Stadsschouwburg' ,'52.0931160000', '5.1264690000'], // alias
+    ['Kat Sculpture' ,'52.1208190000', '5.0714220000'], // alias
+    ['Monument voor gevallenen' ,'52.1157630000', '5.0833350000'], // alias
+    ['Leidingwater' ,'52.0957350000', '5.1387930000'], // alias
+    ['Voormalig gemeentelijk slachthuis' ,'52.1017670000', '5.0988390000'], // alias
+	['Standbeeld De Vlucht' ,'52.1129870000', '5.1052870000'], // alias
 ];
+
 
 exports.gymlist = gymlist;
