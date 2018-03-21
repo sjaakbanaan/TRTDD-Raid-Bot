@@ -43,7 +43,7 @@ var pokelist = [
     ['Snorro', '143', '1917', 'partly cloudy', '2396', '4', 'no'],
     ['Tyranitar', '248', '2097', 'partly cloudy + fog', '2621', '4', 'no'],
     ['Tyra', '248', '2097', 'partly cloudy + fog', '2621', '4', 'no'],
-    ['Victrebell', '071', '1296', 'sunny', '1620', '4', 'no'], ///////////////  TIER 5   
+    ['Victreebell', '071', '1296', 'sunny', '1620', '4', 'no'], ///////////////  TIER 5   
     ['Articuno', '144', '1676', 'snow + windy', '2095', '5', 'no'],
     ['Lugia', '249', '2056', 'windy', '2570', '5', 'yes'],
     ['Moltres', '146', '1870', 'sunny + windy', '2337', '5', 'no'],
