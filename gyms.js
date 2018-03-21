@@ -442,6 +442,8 @@ var gymlist = [
     ['Leidingwater' ,'52.0957350000', '5.1387930000'], // alias
     ['Voormalig gemeentelijk slachthuis' ,'52.1017670000', '5.0988390000'], // alias
 	['Standbeeld De Vlucht' ,'52.1129870000', '5.1052870000'], // alias
+    ['Koptisch Kerk' ,'52.1119530000', '5.0936860000'], // alias
+    ['Koptische Kerk' ,'52.1119530000', '5.0936860000'], // alias
 ];
 
 
