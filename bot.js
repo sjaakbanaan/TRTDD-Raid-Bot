@@ -8,6 +8,17 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
+// SQLite connection
+var sqlite3 = require('sqlite3').verbose();
+
+let db = new sqlite3.Database('/home/pogo/TRTDD-Bot/db/trtddraidbot.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+        logger.error(err.message);
+    } else {
+        logger.info(getLogTime()+': Connected to the TRTDD Raid Bot database.');
+    }
+});
+
 // custom include vars
 var gymlist = require('./gyms.js').gymlist;
 var pokelist = require('./mons.js').pokelist;
@@ -29,8 +40,8 @@ var bot = new Discord.Client({
 
 bot.once('ready', function (evt) {
     logger.info('Connected');
-    logger.info('Logged in as: ');
-    logger.info(bot.username + ' - (' + bot.id + ')');
+    //logger.info('Logged in as: ');
+    //logger.info(bot.username + ' - (' + bot.id + ')');
     bot.setPresence({ game: { name: '!raid' } });
 });
 
@@ -147,12 +158,17 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     urltitle = 'Gymlocatie onbekend, zoek op outgress.com';
                 }
                 if (gymname && !invalidchar) {
+					
+					var pokeid 	= searchList(pokelist, pokemon, 1);
+					var imgpath = 'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/'+pokeid+'.png';
+					if (pokeid > 990) var imgpath = 'https://www.ubierfestival.nl/trtddraidbot/images/'+pokeid+'.png';
                     
                     gymname = toTitleCase(gymname);
                     var shinypossible = '';
                     if (searchList(pokelist, pokemon, 6)=='yes') {
                         shinypossible = ' | shiny possible!';
                     }
+					var editcode = genEditCode();
                     
                     bot.sendMessage({
                         to: channelID,
@@ -166,13 +182,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                             author: {
                               name: '\''+gymname+'\'',
                                 url: embedurl,
-                              icon_url: 'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/'+searchList(pokelist, pokemon, 1)+'.png'
+                              icon_url: imgpath
                             },
                             thumbnail: {
-                              url: 'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/'+searchList(pokelist, pokemon, 1)+'.png'
+                              url: imgpath
                             },
                             footer: {
-                                text: 'wijzigcode: '+genEditCode()+' | 100% IV: '+searchList(pokelist, pokemon, 2)+' CP | '+searchList(pokelist, pokemon, 3)+'? 100% IV: '+searchList(pokelist, pokemon, 4)+' CP'
+                                text: 'wijzigcode: '+editcode+' | 100% IV: '+searchList(pokelist, pokemon, 2)+' CP | '+searchList(pokelist, pokemon, 3)+'? 100% IV: '+searchList(pokelist, pokemon, 4)+' CP'
                             },
                             title: urltitle,
                             url: embedurl,                            
@@ -194,21 +210,33 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         }
                     }, function(err, res) {
                         if (!err) {
+							
+							var raidmsgid = res.id;
                             
                             setTimeout(function() {
                                 bot.deleteMessage({                                    
                                     channelID: channelID,
-                                    messageID: res.id,
+                                    messageID: raidmsgid,
                                 });
                                 logger.info(getLogTime()+': raid auto deleted');
                             }, 7200000); // delete after 2 hours
 
-                            logger.info(getLogTime()+': raid created by '+user+': '+res.id);
+                            logger.info(getLogTime()+': raid created by '+user+': '+raidmsgid);
                             bot.addReaction({
                                 channelID: channelID,
-                                messageID: res.id,
+                                messageID: raidmsgid,
                                 reaction: '👍'
-                            });
+                            });							
+												
+							// insert raid in to db file
+							db.run("INSERT INTO raids(gym_name,date,gym_longlat,raid_boss,created_by,editcode,messageid) VALUES('"+gymname+"','"+getLogTime()+"','"+longlat+"','"+pokemon+"','"+userID+"','"+editcode+"','"+raidmsgid+"')", (err, row) => {
+								if (err){
+									throw err;
+								} else {
+									logger.info(getLogTime()+': raid bij '+gymname+ ' toegevoegd aan database.');
+								}
+							});
+							
                         } else {
                             logger.info(err);
                         }
@@ -219,6 +247,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         channelID: channelID,
                         messageID: evt.d.id,
                     });
+					
                     
                 } else {
                     
@@ -239,7 +268,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         } else {
                             logger.info(err);
                         }
-                    });
+                    });					
+					
                     bot.deleteMessage({
                         channelID: channelID,
                         messageID: evt.d.id,
@@ -557,6 +587,17 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                                 messageID: msgid,
                             });
                             logger.info(getLogTime()+': raid deleted by '+user+': '+msgid);
+							
+							// remove raid from db file
+							db.run("DELETE FROM raids WHERE messageid = "+msgid+"", (err, row) => {
+								if (err){
+									throw err;
+								} else {
+									logger.info(getLogTime()+': raid verwijderd uit database.');
+								}
+							});
+							
+							
                         } else {
 							bot.sendMessage({
 								to: channelID,
@@ -672,8 +713,41 @@ bot.on('messageReactionAdd', function(reaction) {
                         // only sent if it's not the creator
                         editMsg(channelid, msgid, orginfo, orgraidtitle, orgurl, orgthumb, orgstarttime, 
                                 '`'+orgstarter+'`', '`'+orgparticipants+'`', orgmap, orgthumb, orgeditcode, orgtitle);
-                        logger.info(getLogTime()+': participant added: '+username+' to: '+msgid);                        
+                        logger.info(getLogTime()+': participant added: '+username+' to: '+msgid);
+						
+						// add reaction to db file
+						db.run("INSERT INTO raid_participants(discord_id,messageid) VALUES('"+userid+"','"+msgid+"')", (err, row) => {
+							if (err){
+								throw err;
+							} else {
+								logger.info(getLogTime()+': reaction toegevoegd aan database.');
+							}
+						});
+						
+						// send pm's						
+						/* db.all("SELECT discord_id FROM raid_participants WHERE messageid = "+msgid+"", [], (err, rows) => {
+							if (err) {
+								throw err;
+							} else {
+								rows.forEach((row) => {							
+
+									bot.sendMessage({
+										to: row.discord_id,
+										message: 'Er heeft iemand een duimpje gezet bij een raid waar jij naartoe gaat.'
+									}, function(err, res) {
+										if (!err) {
+											logger.info(getLogTime()+': pm sent to users');
+										} else {
+											logger.info(err);
+										}
+									});								
+
+								});
+							}
+						});	*/			
+						
                     }
+					
                 }
             }
         });
@@ -724,7 +798,17 @@ bot.on('messageReactionRemove', function(reaction) {
                         // only sent if it's not the creator
                         editMsg(channelid, msgid, orginfo, orgraidtitle, orgurl, orgthumb, orgstarttime, 
                                 '`'+orgstarter+'`', orgparticipants, orgmap, orgthumb, orgeditcode, orgtitle);
-                        logger.info(getLogTime()+': participant removed: '+username+' to: '+msgid);                        
+                        logger.info(getLogTime()+': participant removed: '+username+' to: '+msgid);						
+											
+						// remove reaction to db file
+						db.run("DELETE FROM raid_participants WHERE discord_id = '"+userid+"' AND messageid = "+msgid+"", (err, row) => {
+							if (err){
+								throw err;
+							} else {
+								logger.info(getLogTime()+': reaction verwijderd van database.');
+							}
+						});
+						
                     }
                 }
             }
@@ -832,10 +916,10 @@ function searchList(what, find, returncol){
 
 function getLogTime(){
     var currentdate = new Date(); 
-    var datetime = currentdate.getDate() + "/"
-            + (currentdate.getMonth()+1)  + "/" 
-            + currentdate.getFullYear() + "-"  
-            + currentdate.getHours() + ":"  
+    var datetime = (currentdate.getMonth()+1) + "/"
+            + currentdate.getDate() + "/"
+            + currentdate.getFullYear() + " "  
+            + currentdate.getHours() + ":"
             + currentdate.getMinutes() + ":" 
             + currentdate.getSeconds();
 	return datetime;
