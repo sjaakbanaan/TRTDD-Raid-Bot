@@ -457,6 +457,7 @@ var gymlist = [
 	['Maliepoort', '52.0889410000', '5.1271630000'], // alias
 	['Stadsschouwburg', '52.0931160000', '5.1264690000'], // alias
 	['Lepelenburg', '52.0899630000', '5.1277800000'], // alias
+	['Sully in Het Gras', '52.096313', '5.107289'],
 ];
 
 
